@@ -63,6 +63,7 @@
                   REPORT BUTTON
                 =====================================================================================
                 -->
+                <!-- zen
                 <v-flex v-if="!mini">
                     <v-layout align-center justify-end column fill-height pa-4>
                         <p class="white--text text-xs-center pb-2">{{ $t('message.report') }}</p>
@@ -71,6 +72,7 @@
                         }}</v-btn>
                     </v-layout>
                 </v-flex>
+                 -->
             </v-layout>
         </v-navigation-drawer>
         <!--
@@ -158,7 +160,8 @@ export default class TheNavigationDrawer extends Vue {
   ===================================================================================
   */
 
-    supportEmail = 'support@ethvm.com'
+    // zen supportEmail = 'support@ethvm.com'
+    supportEmail = 'support@zen-charity.com'
     drawer: boolean = false
     active = 0
     sublink = null
@@ -224,6 +227,8 @@ export default class TheNavigationDrawer extends Vue {
                     text: this.$i18n.tc('tx.name', 2),
                     icon: 'fas fa-exchange-alt',
                     routerLink: '/txs'
+                }
+                /* zen
                 },
                 links: [
                     {
@@ -237,12 +242,15 @@ export default class TheNavigationDrawer extends Vue {
                         name: 'pending'
                     }
                 ]
+                 */
             },
             {
                 header: {
                     text: this.$i18n.tc('token.name', 2),
                     icon: 'fab fa-ethereum',
                     routerLink: '/tokens'
+                }
+                /* zen
                 },
                 links: [
                     {
@@ -256,6 +264,9 @@ export default class TheNavigationDrawer extends Vue {
                         name: 'fav_tokens'
                     }
                 ]
+                 */
+            }
+            /* zen
             },
             {
                 header: {
@@ -271,6 +282,7 @@ export default class TheNavigationDrawer extends Vue {
                     routerLink: '/fav_addresses'
                 }
             }
+             */
         ]
     }
 

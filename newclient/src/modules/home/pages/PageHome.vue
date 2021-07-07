@@ -14,6 +14,7 @@
           Live Charts
         =====================================================================================
         -->
+<!-- zen
         <v-layout row wrap justify-center mb-4 fill-height>
             <v-flex xs12 md6>
                 <v-card flat color="white" height="100%">
@@ -26,6 +27,7 @@
                 </v-card>
             </v-flex>
         </v-layout>
+ -->
         <!--
         =====================================================================================
           Latest Blocks
