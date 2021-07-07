@@ -32,7 +32,7 @@
           HOLDERS
         =====================================================================================
         -->
-<!-- zen
+                <!-- zen
                 <v-tab-item slot="tabs-item" value="tab-1">
                     <token-holders :address-ref="addressRef" :decimals="decimals" @errorDetails="emitErrorState" @isNft="getTokenType" />
                 </v-tab-item>

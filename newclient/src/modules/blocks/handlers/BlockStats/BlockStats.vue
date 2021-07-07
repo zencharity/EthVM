@@ -14,7 +14,7 @@
                 back-type="time-since"
             />
         </v-flex>
-<!-- zen
+        <!-- zen
         <v-flex xs12 sm6 md3>
             <app-info-card
                 :title="$t('block.hash-rate')"

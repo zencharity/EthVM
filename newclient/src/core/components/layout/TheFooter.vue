@@ -11,7 +11,7 @@
         MD: 3/12 (3)
       =====================================================================================
       -->
-      <!-- zen
+            <!-- zen
             <v-flex :class="flexClass" xs12 sm6 md3>
                 <v-card flat>
                     <v-layout row pa-0 align-center>
@@ -42,7 +42,7 @@
         MD: 8/12 (5)
       =====================================================================================
       -->
-      <!-- zen
+            <!-- zen
             <v-flex :class="flexClass" xs12 sm6 md3>
                 <v-card flat>
                     <v-layout row pa-0 align-center>
@@ -71,7 +71,7 @@
                         <v-card-title class="title font-weight-bold pb-2">Social</v-card-title>
                         <v-flex xs12>
                             <v-layout row justify-start align-center fill-height pa-1>
-<!-- zen
+                                <!-- zen
                                 <v-btn href="https://www.reddit.com/r/ethvm" icon class="ma-1">
                                     <v-icon small class="fab fa-reddit grey--text"></v-icon>
                                 </v-btn>
@@ -81,10 +81,12 @@
                                     <v-icon small class="fab fa-medium-m grey--text"></v-icon>
                                 </v-btn>
  -->
-                                <v-btn href="https://github.com/zencharity/EthVM" icon class="ma-1"> <v-icon small class="fab fa-github grey--text"></v-icon> </v-btn>
+                                <v-btn href="https://github.com/zencharity/EthVM" icon class="ma-1">
+                                    <v-icon small class="fab fa-github grey--text"></v-icon>
+                                </v-btn>
                             </v-layout>
                         </v-flex>
-<!-- zen
+                        <!-- zen
                         <v-flex xs12>
                             <v-layout justify-start align-center fill-height pa-2>
                                 <p class="info--text text-xs-left caption pl-2">

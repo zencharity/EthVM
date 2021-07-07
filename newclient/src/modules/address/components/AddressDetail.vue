@@ -189,7 +189,7 @@
                       USD BALANCE
                     =====================================================================================
                     -->
-<!-- zen
+                    <!-- zen
                     <v-flex xs12 md4>
                         <v-card class="error white--text pl-2 pr-2 desktop-block" flat>
                             <v-card-text class="pb-0">{{ $t('usd.value') }} {{ usdBalanceString }}</v-card-text>
