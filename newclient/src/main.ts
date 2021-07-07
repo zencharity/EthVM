@@ -49,7 +49,11 @@ const httpLink = new HttpLink({
     uri: configs.APOLLO_HTTP
 })
 
-const subscriptionClient = new SubscriptionClient(configs.APOLLO_WS, { lazy: true, reconnect: true }, null, [])
+//const subscriptionClient = new SubscriptionClient(configs.APOLLO_WS, { lazy: true, reconnect: true }, null, [])
+const subscriptionClient = {
+    uri: configs.APOLLO_WS,
+    options: { lazy: true, reconnect: true }
+}
 
 const wsLink = new WebSocketLink(subscriptionClient)
 
