@@ -14,6 +14,7 @@
                 back-type="time-since"
             />
         </v-flex>
+        <!-- zen
         <v-flex xs12 sm6 md3>
             <app-info-card
                 :title="$t('block.hash-rate')"
@@ -27,6 +28,7 @@
         <v-flex xs12 sm6 md3>
             <app-info-card :title="$t('diff.name')" :value="latestDifficulty" :metrics="''" :is-loading="loading" color-type="error" back-type="difficulty" />
         </v-flex>
+ -->
     </v-layout>
 </template>
 

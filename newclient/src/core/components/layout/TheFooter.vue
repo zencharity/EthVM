@@ -11,6 +11,7 @@
         MD: 3/12 (3)
       =====================================================================================
       -->
+            <!-- zen
             <v-flex :class="flexClass" xs12 sm6 md3>
                 <v-card flat>
                     <v-layout row pa-0 align-center>
@@ -30,6 +31,7 @@
                     </a>
                 </v-card>
             </v-flex>
+            -->
             <!--
       =====================================================================================
         Donate
@@ -40,6 +42,7 @@
         MD: 8/12 (5)
       =====================================================================================
       -->
+            <!-- zen
             <v-flex :class="flexClass" xs12 sm6 md3>
                 <v-card flat>
                     <v-layout row pa-0 align-center>
@@ -61,12 +64,14 @@
                     </v-layout>
                 </v-card>
             </v-flex>
+      -->
             <v-flex :class="flexClass" xs12 sm6 md3>
                 <v-card flat>
                     <v-layout row wrap justify-start align-center fill-height>
                         <v-card-title class="title font-weight-bold pb-2">Social</v-card-title>
                         <v-flex xs12>
                             <v-layout row justify-start align-center fill-height pa-1>
+                                <!-- zen
                                 <v-btn href="https://www.reddit.com/r/ethvm" icon class="ma-1">
                                     <v-icon small class="fab fa-reddit grey--text"></v-icon>
                                 </v-btn>
@@ -75,8 +80,13 @@
                                 <v-btn href="https://medium.com/@myetherwallet" icon class="ma-1">
                                     <v-icon small class="fab fa-medium-m grey--text"></v-icon>
                                 </v-btn>
+ -->
+                                <v-btn href="https://github.com/zencharity/EthVM" icon class="ma-1">
+                                    <v-icon small class="fab fa-github grey--text"></v-icon>
+                                </v-btn>
                             </v-layout>
                         </v-flex>
+                        <!-- zen
                         <v-flex xs12>
                             <v-layout justify-start align-center fill-height pa-2>
                                 <p class="info--text text-xs-left caption pl-2">
@@ -84,6 +94,7 @@
                                 </p>
                             </v-layout>
                         </v-flex>
+ -->
                         <v-flex xs12 pa-0>
                             <v-layout justify-start align-center>
                                 <v-btn flat left class="ma-0 pa-0" @click="openMewLink()">
@@ -94,6 +105,7 @@
                     </v-layout>
                 </v-card>
             </v-flex>
+
             <!--
       =====================================================================================
         Language
