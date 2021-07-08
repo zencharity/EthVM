@@ -20,8 +20,8 @@ import configs from './configs'
 import router from '@app/core/router'
 import App from '@app/modules/App.vue'
 import i18n from '@app/translations'
-import * as Sentry from '@sentry/browser'
-import { Vue as VueIntegration } from '@sentry/integrations'
+//zen import * as Sentry from '@sentry/browser'
+//zen import { Vue as VueIntegration } from '@sentry/integrations'
 import Vue from 'vue'
 import toChecksum from '@app/core/filters/toChecksum'
 import { isAPIExceptionProduction, isAPIExceptionDev } from './apollo/exceptions/errorExceptions'
@@ -62,11 +62,12 @@ const onErrorLink = onError(({ graphQLErrors }) => {
         graphQLErrors.map(({ message, locations, path }) => {
             const newError = `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
             //For production and staging emit to Sentry:
+            /* zen
             if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
                 if (!isAPIExceptionProduction(message)) {
                     Sentry.captureException(newError)
                 }
-            } else {
+            } else { */ {
                 //For Development use only console errors:
                 if (!isAPIExceptionDev(message)) {
                     console.log(newError)
@@ -183,6 +184,7 @@ new Vue({
     Sentry
   ===================================================================================
 */
+/* zen
 const sentryToken = process.env.VUE_APP_SENTRY_SECURITY_DSN
 
 Sentry.init({
@@ -194,3 +196,4 @@ Sentry.init({
     },
     release: configs.VERSION
 })
+*/
