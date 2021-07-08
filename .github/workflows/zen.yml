@@ -15,7 +15,7 @@ jobs:
         id: info
         run: >-
           aws --version
-          if [ "$GITHUB_REF = "refs/heads/zen-production" ]; then
+          if [ "x$GITHUB_REF" = "xrefs/heads/zen-production" ]; then
             echo ::set-output name=DEPLOY_ENV::$(echo -n "production")
             echo ::set-output name=BUCKET::$(echo -n "zen-charity.net.production.ethvm")
             echo ::set-output name=DOMAIN::$(echo -n "zen-charity.net")
