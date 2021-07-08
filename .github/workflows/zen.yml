@@ -5,7 +5,7 @@ on:
     branches:
       - 'zen-develop'
       - 'zen-production'
-      - 'zen-ise-ghaction'
+      - 'feature/zen-ise-ghaction'
 
 jobs:
   ethvmBuild:
