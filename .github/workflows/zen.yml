@@ -1,0 +1,84 @@
+name: add to ethvmBuild
+
+on:
+  push:
+    branches:
+      - 'zen-develop'
+      - 'zen-production'
+      - 'zen-ise-ghaction'
+
+jobs:
+  ethvmBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: info
+        id: info
+        run: >-
+          aws --version
+          if [ "$GITHUB_REF = "refs/heads/zen-production" ]; then
+            echo ::set-output name=DEPLOY_ENV::$(echo -n "production")
+            echo ::set-output name=BUCKET::$(echo -n "zen-charity.net.production.ethvm")
+            echo ::set-output name=DOMAIN::$(echo -n "zen-charity.net")
+            echo ::set-output name=AWS_REGION::$(echo -n "eu-west-2")
+            echo ::set-output name=AWS_APIKEY::$(echo -n secrets.PROD_AWS_APIKEY)
+            echo ::set-output name=AWS_SECRET::$(echo -n secrets.PROD_AWS_SECRET)
+          else
+            echo ::set-output name=DEPLOY_ENV::$(echo -n "develop")
+            echo ::set-output name=BUCKET::$(echo -n "zen-charity.net.develop.ethvm")
+            echo ::set-output name=DOMAIN::$(echo -n "develop.zen-charity.net")
+            echo ::set-output name=AWS_REGION::$(echo -n "ap-northeast-1")
+            echo ::set-output name=AWS_APIKEY::$(echo -n secrets.DEV_AWS_APIKEY)
+            echo ::set-output name=AWS_SECRET::$(echo -n secrets.DEV_AWS_SECRET)
+          fi
+
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{env.NODE_VERSION}}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{env.NODE_VERSION}}-
+      - name: yarn install
+        run: cd ./newclient && yarn install
+
+      - name: yarn lint
+        run: cd ./newclient && yarn install && yarn lint
+
+      - name: build
+        run: cd ./newclient && bash build.sh
+        env:
+           #VUE_APP_SENTRY_SECURITY_TOKEN: ${{ secrets.VUE_APP_SENTRY_SECURITY_TOKEN }}
+          #VUE_APP_SENTRY_SECURITY_DSN: ${{ secrets.VUE_APP_SENTRY_SECURITY_DSN }}
+          #VUE_APP_ETH_NETWORK: ${{ secrets.VUE_APP_ETH_NETWORK }}
+          #VUE_APP_PUBLIC_URL: ${{ secrets.VUE_APP_PUBLIC_URL }}
+          VUE_APP_HTTP_LINK: https://ethvm-api.${{ steps.info.outputs.DOMAIN }}/
+          VUE_APP_WS_CLIENT: wss://ethvm-api.${{ steps.info.outputs.DOMAIN }}/graphql
+          VUE_APP_OPENSEA_API: ""
+
+      - name: post build
+        if: github.base_ref == ''
+        env:
+          AWS_DEFAULT_REGION: ${{steps.info.outputs.AWS_REGION}}
+          AWS_ACCESS_KEY_ID: ${{steps.info.outputs.AWS_APIKEY}}
+          AWS_SECRET_ACCESS_KEY: ${{steps.info.outputs.AWS_SECRET}}
+          VIRUS_TOTAL_API_KEY: ${{secrets.VIRUS_TOTAL_API_KEY}}
+          GITHUB_TOKEN: ${{secrets.MY_GITHUB_TOKEN}}
+          BUCKET: ${{ steps.info.outputs.BUCKET }}
+        run: |
+          cd ./newclient
+          pip install --user awscli
+          aws s3 sync --delete --acl public-read dist/ s3://$BUCKET
+          #aws s3 cp s3://ethvm-mainnet-web/builds/$GITHUB_SHA/index.html s3://ethvm-mainnet-web/builds/$GITHUB_SHA/index.html \
+          #  --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate \
+          #  --content-type text/html --acl public-read
+          cd dist && zip -r ../ethVM-$GITHUB_SHA.zip * && cd ..
+          VIRUS_TOTAL_URL=`curl -s -F "file=@ethVM-$GITHUB_SHA.zip" -F apikey=${VIRUS_TOTAL_API_KEY} https://www.virustotal.com/vtapi/v2/file/scan | jq --raw-output '.permalink'`
+          curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
+            -d "{\"body\": \"<br/> \
+                            Virus Total analysis <br/> \
+                            $VIRUS_TOTAL_URL\"}" \
+                            "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/comments"
