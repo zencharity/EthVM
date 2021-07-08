@@ -79,7 +79,9 @@ jobs:
           cd dist && zip -r ../ethVM-$GITHUB_SHA.zip * && cd ..
           echo "virus total..."
           VIRUS_TOTAL_URL=`curl -s -F "file=@ethVM-$GITHUB_SHA.zip" -F apikey=${VIRUS_TOTAL_API_KEY} https://www.virustotal.com/vtapi/v2/file/scan | jq --raw-output '.permalink'`
+          echo "  $VIRUS_TOTAL_URL"
           echo "update commit comment..."
+          echo "  https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/comments"
           curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
             -d "{\"body\": \"<br/> \
                             Virus Total analysis <br/> \
