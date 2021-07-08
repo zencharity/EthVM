@@ -30,11 +30,6 @@ jobs:
             echo ::set-output name=AWS_SECRET::$(echo -n "${{ secrets.DEV_AWS_SECRET }}")
           fi
 
-      - name: check aws
-        run: |
-          pip install --user awscli
-          aws s3 ls s3://$BUCKET
-
       - uses: actions/checkout@v2
 
       - name: Cache node modules
