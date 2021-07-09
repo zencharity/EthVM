@@ -46,7 +46,8 @@ export default class App extends Vue {
   ===================================================================================
   */
     get appGreet() {
-        return !storePack.get('notFirstTimeVisit')
+        //zen return !storePack.get('notFirstTimeVisit')
+        return false
     }
     get connected(): boolean {
         return true
