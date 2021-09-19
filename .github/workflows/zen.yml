@@ -49,13 +49,13 @@ jobs:
       - name: build
         run: cd ./newclient && bash build.sh
         env:
-           #VUE_APP_SENTRY_SECURITY_TOKEN: ${{ secrets.VUE_APP_SENTRY_SECURITY_TOKEN }}
+          #VUE_APP_SENTRY_SECURITY_TOKEN: ${{ secrets.VUE_APP_SENTRY_SECURITY_TOKEN }}
           #VUE_APP_SENTRY_SECURITY_DSN: ${{ secrets.VUE_APP_SENTRY_SECURITY_DSN }}
           #VUE_APP_ETH_NETWORK: ${{ secrets.VUE_APP_ETH_NETWORK }}
           #VUE_APP_PUBLIC_URL: ${{ secrets.VUE_APP_PUBLIC_URL }}
-          VUE_APP_HTTP_LINK: https://ethvm-api.${{ steps.info.outputs.DOMAIN }}/
-          VUE_APP_WS_CLIENT: wss://ethvm-api.${{ steps.info.outputs.DOMAIN }}/graphql
-          VUE_APP_OPENSEA_API: ""
+          HTTP_LINK: https://ethvm-api.${{ steps.info.outputs.DOMAIN }}/
+          WS_CLIENT: wss://ethvm-api.${{ steps.info.outputs.DOMAIN }}/graphql
+          OPENSEA_API: ""
 
       - name: post build
         if: github.base_ref == ''
